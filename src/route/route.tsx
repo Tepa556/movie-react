@@ -6,7 +6,7 @@ const AppRoutes=()=>{
      return(
         <Routes>
             <Route path="/" element={<Main />} />
-            <Route path="/movie" element={<MoviePage />} />
+            <Route path="/movie/:id" element={<MoviePage />} />
         </Routes>
      )
 }

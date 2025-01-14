@@ -14,7 +14,7 @@ const Main = () => {
     console.log(movies)
     return (
         <>
-        <form onSubmit={handleSearch} className="">
+        <form onSubmit={handleSearch} className="search-input">
             <Input value={search} onChange={searchChange} />
             <Button />
         </form> 

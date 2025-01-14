@@ -17,6 +17,7 @@ const Input = ({ value, onChange }: SearchProps) => {
                 type="text"
                 value={value}
                 onChange={handleChange}
+                className=""
             />
         </>
     )

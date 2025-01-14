@@ -1,0 +1,15 @@
+.search-input{
+    margin-top: 50px;
+    margin-left: 50%;
+}
+.movie-card{
+    margin:20px;
+    width: 400px;
+    height: 500px;
+    border: 2px solid black;
+    cursor: pointer;
+}
+.poster{
+    width: 100px;
+    height: 100px;
+}

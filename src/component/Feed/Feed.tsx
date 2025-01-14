@@ -7,7 +7,7 @@ interface MovieParam{
 const Feed = ({movies}:MovieParam) => {
     console.log(`Фильмы: ${movies}`)
     return (
-        movies.map((movie) => <MovieCard {...movie}/>)
+        movies.map((movie) => <MovieCard  key={movie.imdbID}  {...movie}/>)
     )
 }
 export default Feed

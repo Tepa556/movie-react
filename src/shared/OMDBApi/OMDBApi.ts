@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL="http://www.omdbapi.com/";
+const BASE_URL="https://www.omdbapi.com/";
 
 const OMDBApiInstance=axios.create({baseURL:BASE_URL});
 
@@ -8,7 +8,7 @@ const API_KEY=import.meta.env.VITE_API_KEY;
 export interface IMovie{
       Title:string
       Year:number
-      imdID:number
+      imdbID:number
       Type:string
       Poster:string
 }
