@@ -13,3 +13,13 @@
     width: 100px;
     height: 100px;
 }
+.favorite-default{
+    z-index: 10;
+    cursor: pointer;
+}
+.favorite-active{
+    cursor: pointer;
+    z-index: 10;
+    color: red;
+}
+
