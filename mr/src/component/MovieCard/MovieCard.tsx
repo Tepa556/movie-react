@@ -1,39 +1,62 @@
-import { IMovie } from "../../shared/OMDBApi/OMDBApi"
-import { useNavigate } from "react-router-dom"
-import React, { useState } from "react"
-import FavoriteIcon from '@mui/icons-material/Favorite'
-const MovieCard=(movie:IMovie)=>{
-    const [favoriteFilm,setFavoriteFilm]=useState(()=>{
-        const savedState=localStorage.getItem('favoriteFilm')
-        return savedState ? JSON.parse(savedState) : false
-    })
-    let favoriteFimsArray=[];//Массив для записи в localstorage с id фильма и состояния его лайка 
-    let navigate=useNavigate();
-    localStorage.setItem('favoriteFilm',JSON.stringify(favoriteFilm))
-    //console.log(localStorage.getItem('favoriteFilm'))
-    function openMoviePage(){
-        navigate(`/movie/${movie.imdbID}`)
+import { IMovie } from "../../shared/OMDBApi/OMDBApi";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+
+const MovieCard = (movie: IMovie) => {
+    const navigate = useNavigate();
+    const [isFavorite, setIsFavorite] = useState<boolean>(false);
+
+
+    useEffect(() => {
+        const savedFavorites = localStorage.getItem('favoriteFilms');
+        if (savedFavorites) {
+            const favoritesArray = JSON.parse(savedFavorites);
+            setIsFavorite(favoritesArray.includes(movie.imdbID));
+        }
+    }, [movie.imdbID]);
+
+    function openMoviePage() {
+        navigate(`/movie/${movie.imdbID}`);
     }
-    function addFavoriteFilm(e:React.MouseEvent<SVGSVGElement>){
-        setFavoriteFilm(true)
-        console.log(e.currentTarget.closest('.movie-card'))
+
+    function addFavoriteFilm() {
+        setIsFavorite(true);
+        updateFavorites(true);
     }
-    function removeFavoriteFilm(e:React.MouseEvent<SVGSVGElement>){
-        setFavoriteFilm(false)
-        console.log(e.currentTarget.closest('.movie-card'))
+
+    function removeFavoriteFilm() {
+        setIsFavorite(false);
+        updateFavorites(false);
     }
-    return(
-        <div className="movie-card" key={movie.imdbID}>
-            <img src={movie.Poster} alt="" className="poster"/>
+
+    function updateFavorites(isAdding: boolean) {
+        const savedFavorites = localStorage.getItem('favoriteFilms');
+        let favoritesArray: string[] = savedFavorites ? JSON.parse(savedFavorites) : [];
+    
+        if (isAdding) {
+            if (!favoritesArray.includes(movie.imdbID.toString())) {
+                favoritesArray.push(movie.imdbID.toString()); // Приводим к строке
+            }
+        } else {
+            favoritesArray = favoritesArray.filter((id: string) => id !== movie.imdbID.toString()); // Приводим к строке
+        }
+    
+        localStorage.setItem('favoriteFilms', JSON.stringify(favoritesArray));
+    }
+
+    return (
+        <div className="movie-card" key={movie.imdbID} >
+            <img src={movie.Poster} alt="" className="poster" />
             <h1>{movie.Title}</h1>
             <p>{movie.Year}</p>
-            {favoriteFilm==false ?
-            <FavoriteIcon className="favorite-default" onClick={addFavoriteFilm} /> :
-            <FavoriteIcon className="favorite-active" onClick={removeFavoriteFilm} />
+            {isFavorite ? 
+                <FavoriteIcon className="favorite-active" onClick={removeFavoriteFilm} /> :
+                <FavoriteIcon className="favorite-default" onClick={addFavoriteFilm} />
             }
+            <button className="more-info-button" onClick={openMoviePage}>Подробнее</button>
         </div>
-    
-    )
+    );
 }
 
-export default MovieCard
+export default MovieCard;
