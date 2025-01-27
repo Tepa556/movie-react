@@ -1,12 +1,19 @@
 import { useParams } from "react-router-dom";
-import { IMovie } from "../../shared/OMDBApi/OMDBApi"
+import { useEffect } from "react";
 
-interface MovieViews{
-    movie:IMovie[]
+interface Params {
+    id: string;
 }
-const MoviePage=()=>{
-    let { id } = useParams();
 
+const MoviePage=()=>{
+    const { id }:Params= useParams();
+    useEffect(()=>{
+        let getMovieArray=localStorage.getItem('movieArray')
+        console.log(typeof(getMovieArray))
+        const filterById = (id) => {
+            return movies.filter(movie => movie.imdbID === id);
+        }
+    }) 
     return(
         <>
          <h1>ДАДАЯ!</h1>

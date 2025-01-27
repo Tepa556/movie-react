@@ -2,7 +2,7 @@ import Feed from "../../component/Feed/Feed"
 import Button from "../../component/Search/Button"
 import Input from "../../component/Search/Input"
 import OMDBApi, { IMovie } from "../../shared/OMDBApi/OMDBApi"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 const Main = () => {
     const [search, searchChange] = useState("")
     const [movies,setMovies]=useState<IMovie[]>([]);
@@ -11,7 +11,13 @@ const Main = () => {
         e.preventDefault();
         setMovies((await OMDBApi.searchMovie(search)).Search) 
     }
-    console.log(movies)
+    useEffect(()=>{
+
+        /*console.log(movies)*/
+        localStorage.setItem("movieArray",JSON.stringify(movies))
+        let getMovieArray=localStorage.getItem('movieArray')
+        console.log(getMovieArray)
+    })
     return (
         <>
         <form onSubmit={handleSearch} className="search-input">

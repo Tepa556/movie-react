@@ -3,7 +3,7 @@ const BASE_URL="https://www.omdbapi.com/";
 
 const OMDBApiInstance=axios.create({baseURL:BASE_URL});
 
-const API_KEY=import.meta.env.VITE_API_KEY;
+const API_KEY="505480d7";
 
 export interface IMovie{
       Title:string
