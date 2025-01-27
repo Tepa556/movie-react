@@ -14,13 +14,7 @@ const FavoriteMoviesList = () => {
 
     return (
         <div className="favorite-movies-list">
-            {favoriteFilms.length > 0 ? (
-                favoriteFilms.map((filmId) => (
-                    <MovieCard key={filmId} imdbID={filmId} />
-                ))
-            ) : (
-                <p>У вас нет избранных фильмов.</p>
-            )}
+    
         </div>
     );
 }

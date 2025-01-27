@@ -3,8 +3,9 @@ import Button from "../../component/Search/Button"
 import Input from "../../component/Search/Input"
 import OMDBApi, { IMovie } from "../../shared/OMDBApi/OMDBApi"
 import FavoriteIcon from '@mui/icons-material/Favorite'
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+
 const Main = () => {
     const [search, searchChange] = useState("")
     const [movies,setMovies]=useState<IMovie[]>([]);
@@ -14,7 +15,6 @@ const Main = () => {
         setMovies((await OMDBApi.searchMovie(search)).Search) 
     }
     useEffect(()=>{
-
         /*console.log(movies)*/
         localStorage.setItem("movieArray",JSON.stringify(movies))
         let getMovieArray=localStorage.getItem('movieArray')
@@ -27,7 +27,7 @@ const Main = () => {
             <Input value={search} onChange={searchChange} />
             <Button />
         </form> 
-        <FavoriteIcon onClick={openFavoritePage} className="favorite-movie" /> 
+        <FavoriteIcon className="favorite-movie" /> 
         </div>
         <div>
             <Feed movies={movies}/>
