@@ -1,6 +1,11 @@
-.search-input{
-    margin-top: 50px;
-    margin-left: 50%;
+.main-container{
+    display: flex;
+    justify-self: center;
+    gap: 50px;
+}
+.favorite-movie{
+    cursor: pointer;
+    color: red;
 }
 .movie-card{
     margin:20px;
