@@ -1,15 +1,16 @@
-import {Routes,Route} from 'react-router-dom';
-import Main from '../pages/Main/Main';
-import MoviePage from '../pages/MoviePage/MoviePage';
-import FavoriteMovie from '../pages/FavoriteMovie/FavoriteMovie';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Main from "../pages/Main";
+import MovieDetails from "../pages/MovieDetails";
+import LikedMovies from "../pages/LikedMovies";
 
-const AppRoutes=()=>{
-     return(
-        <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/movie/:id" element={<MoviePage />} />
-            <Route path='/favorite/movie' element={<FavoriteMovie />} />
-        </Routes>
-     )
-}
+const AppRoutes = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path="/movie/:id" element={<MovieDetails />} />
+      <Route path="/liked" element={<LikedMovies />} />
+    </Routes>
+  </BrowserRouter>
+);
+
 export default AppRoutes;
